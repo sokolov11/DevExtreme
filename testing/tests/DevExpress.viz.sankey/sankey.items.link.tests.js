@@ -376,6 +376,7 @@ QUnit.test("links style when adjacent node is hovered", function(assert) {
         },
         link: {
             color: '#112233',
+            followNodeColor: false,
             hoverStyle: {
                 color: '#ffeedd'
             }
@@ -422,4 +423,32 @@ QUnit.test("links style when adjacent node is hovered", function(assert) {
     assert.equal(this.link(2)[0].smartAttr.lastCall.args[0].opacity, 0.5);
     assert.equal(this.link(2)[0].smartAttr.lastCall.args[0].fill, '#ffeedd');
     assert.equal(this.link(2)[1].smartAttr.lastCall.args[0].opacity, 0);
+});
+
+QUnit.test("links style when adjacent node is hovered and link.followNodeColor is true", function(assert) {
+    var sankey = createSankey({
+        dataSource: [{ source: 'A', target: 'Z', weight: 1 }, { source: 'B', target: 'Z', weight: 1 }, { source: 'C', target: 'Z', weight: 1 }],
+        node: {
+            color: '#aabbcc'
+        },
+        link: {
+            color: '#112233',
+            followNodeColor: true,
+            hoverStyle: {
+                color: '#ffeedd'
+            }
+        }
+    });
+
+    sankey.getAllNodes()[0].hover(true);
+    assert.equal(this.link(0)[0].attr.lastCall.args[0].fill, '#aabbcc');
+
+    sankey.getAllNodes()[0].hover(false);
+    sankey.getAllNodes()[1].hover(true);
+    assert.equal(this.link(1)[0].attr.lastCall.args[0].fill, '#aabbcc');
+
+    sankey.getAllNodes()[1].hover(false);
+    sankey.getAllNodes()[2].hover(true);
+    assert.equal(this.link(2)[0].attr.lastCall.args[0].fill, '#aabbcc');
+
 });

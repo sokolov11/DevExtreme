@@ -382,6 +382,12 @@ var dxSankey = {
         */
         opacity: 0.3,
         /**
+        * @name dxSankeyOptions.link.followNodeColor
+        * @type boolean
+        * @default false
+        */
+        followNodeColor: false,
+        /**
         * @name dxSankeyOptions.link.border
         * @type object
         */

@@ -164,11 +164,12 @@ var dxSankey = require("../core/base_widget").inherit({
     },
 
     _applyLinksAppearance: function(nodeHovered) {
-        this._links.forEach(function(link) {
+        var that = this;
+        that._links.forEach(function(link) {
             var state = link.getState();
             link.element.smartAttr(link.states[state]);
             link.overlayElement.smartAttr(link.overlayStates[state]);
-            if(nodeHovered) {
+            if(that._linkFollowsNodeColor && nodeHovered) {
                 link.overlayElement.attr({ fill: nodeHovered.color });
             }
         });
@@ -255,6 +256,7 @@ var dxSankey = require("../core/base_widget").inherit({
                     .map((item) => { return item.length; })
                     .reduce((previousValue, currentValue) => { return previousValue + currentValue; }, 0);
 
+            that._linkFollowsNodeColor = linkOptions.followNodeColor;
             that._nodes = [];
             that._links = [];
 
