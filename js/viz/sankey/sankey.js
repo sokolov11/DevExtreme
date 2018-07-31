@@ -163,11 +163,14 @@ var dxSankey = require("../core/base_widget").inherit({
         });
     },
 
-    _applyLinksAppearance: function() {
+    _applyLinksAppearance: function(nodeHovered) {
         this._links.forEach(function(link) {
             var state = link.getState();
             link.element.smartAttr(link.states[state]);
             link.overlayElement.smartAttr(link.overlayStates[state]);
+            if(nodeHovered) {
+                link.overlayElement.attr({ fill: nodeHovered.color });
+            }
         });
     },
 
@@ -208,7 +211,7 @@ var dxSankey = require("../core/base_widget").inherit({
                 } else if(!_isNumber(item[weightField]) || item[weightField] <= 0) {
                     that._incidentOccurred("E2009", weightField);
                 } else {
-                    processedData.push([ item[sourceField], item[targetField], item[weightField] ]);
+                    processedData.push([item[sourceField], item[targetField], item[weightField]]);
                 }
 
             }

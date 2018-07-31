@@ -103,7 +103,7 @@ Node.prototype = {
         }
 
         this.widget._applyNodesAppearance();
-        this.widget._applyLinksAppearance();
+        this.widget._applyLinksAppearance(this);
     },
 
     hover: function(state) {
