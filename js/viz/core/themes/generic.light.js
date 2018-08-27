@@ -1574,8 +1574,7 @@ registerTheme({
             },
             border: {
                 visible: false,
-                width: 2,
-                color: WHITE
+                width: 2
             },
             customizeText: function(info) {
                 return info.title;
